@@ -1,42 +1,56 @@
-const express = require('express');
-const cors = require('cors');
-const logger = require('morgan');
-const ejs = require('ejs');
-
-const config = require('./config');
-require('./lib/getExchenge.js');
+require('./core/express-promise');
+const express = require("express");
 const app = express();
-
-const mongoose = require('mongoose');
-
-mongoose.connect(config.mongodb_URI, { useFindAndModify: false, useNewUrlParser: true, useUnifiedTopology: true }, (error) => {
-  if (error) console.log(error)
-    console.log('DB connected... 😄');
-});
-
+const logger = require("morgan");
+const bodyParser = require('body-parser');
+const expressDomain = require('express-domain');
+const config = require("./config");
+const cookieParser = require('cookie-parser');
+const notFound = require('./middleware/not-found');
+const errorHandler = require('./middleware/error-handler');
+const validationErrorHandler = require('./middleware/validation-error-handler');
+const passport = require('./auth');
+const session = require('express-session');
 const PORT = config.PORT;
 
-// const routes = require('./routes');
-const apiRoutes = require('./routes/apiRoutes/apiRoutes.js');
+const routes = require('./routes/routes');
 
-app.set('view engine', 'ejs');
+app.use(expressDomain());
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// use logger
+app.use(logger("dev"));
 
-app.use(cors('*'));
-app.use(logger('dev'));
+// Routes
+// main route return static
+app.get("/", express.static("public"));
 
-app.use(express.static('static'));
+app.use(bodyParser.json({limit: '2mb'}));
+app.use(bodyParser.urlencoded({extended: false, limit: '2mb'}));
+app.use(cookieParser());
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: true,
+    secret: config.cookieSecret
+  })
+);
 
-app.get('/', (req, res) => {
-  res.render('index');
-})
-app.get('/dashboard', (req, res) => {
-  res.render('dashboard');
-})
-app.use('/api', apiRoutes);
 
-app.listen(PORT, ()=> {
-    console.log(`Server success started on ${PORT} port`);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use("/api", routes);
+app.use('/*', notFound);
+
+// add error handlers
+app.use(validationErrorHandler);
+app.use(errorHandler);
+
+
+const server = app.listen(PORT, () => {
+  console.log(`➡️  Wallet app listening on port ${PORT} 🤟`);
 });
+
+app.set('server', server);
+
+
