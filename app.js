@@ -13,7 +13,7 @@ mongoose.connect(config.mongodb_URI, { useFindAndModify: false, useNewUrlParser:
 
 const PORT = config.PORT;
 
-const routes = require('./routes');
+// const routes = require('./routes');
 const apiRoutes = require('./routes/apiRoutes/apiRoutes.js');
 
 app.use(express.json());

@@ -4,11 +4,11 @@ const getOrderById = async (req, res) => {
   const orderId = req.params.orderId;
 
   try {
-    const findOrder = await OrdersModel.findById(orderId);
+    const order = await OrdersModel.findById(orderId);
     // const findUser = await UsersModel.find({ _id: userId });
     res.json({
-      status: "OK",
-      order: findOrder
+      status: success, 
+      order: order
     })
   } catch (error) {
     res.status(400).json({
