@@ -1,4 +1,5 @@
 require('./core/express-promise');
+require('./lib/getExchenge');
 const express = require("express");
 const app = express();
 const logger = require("morgan");
@@ -17,11 +18,8 @@ const routes = require('./routes/routes');
 
 app.use(expressDomain());
 
-// use logger
 app.use(logger("dev"));
 
-// Routes
-// main route return static
 app.get("/", express.static("public"));
 
 app.use(bodyParser.json({limit: '2mb'}));
@@ -42,7 +40,6 @@ app.use(passport.session());
 app.use("/api", routes);
 app.use('/*', notFound);
 
-// add error handlers
 app.use(validationErrorHandler);
 app.use(errorHandler);
 

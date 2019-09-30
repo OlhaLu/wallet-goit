@@ -1,5 +1,3 @@
-
-
 const { JsonWebTokenError } = require('jsonwebtoken');
 
 module.exports = function internalServerError(err, req, res, next) {

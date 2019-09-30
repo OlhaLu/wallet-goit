@@ -1,6 +1,4 @@
 'use strict';
-
-
 const {ValidationError} = require('sequelize');
 
 module.exports = function validationErrorHandler(err, req, res, next) {

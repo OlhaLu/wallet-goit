@@ -1,4 +1,4 @@
-const ExchangeModel = require("../models/exchange.model.js");
+const ExchangeModel = require("../models/transactionsModel.js");
 const getDataFromPbApi = require('./apiPrivatBank.js');
 
 module.exports = async function() {
