@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const logger = require('morgan');
 const config = require('./config');
-require('./lib/getExchenge.js');
 const app = express();
 
 const mongoose = require('mongoose');
