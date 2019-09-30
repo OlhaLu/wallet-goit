@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vbguard/node6-practice.git"
+    "url": "git+https://OlhaLu.github.io/wallet-goit.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "OlhaLu <olhalutsyshyna@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vbguard/node6-practice/issues"
+    "url": "https://OlhaLu.github.io/wallet-goit/issues"
   },
-  "homepage": "https://github.com/vbguard/node6-practice#readme",
+  "homepage": "https://OlhaLu.github.io/wallet-goit#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
