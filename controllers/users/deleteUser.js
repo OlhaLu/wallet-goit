@@ -5,11 +5,11 @@ const deleteUser = async (req, res) => {
 
   try {
     const deletedUser = await UsersModel.findByIdAndDelete(userId);
-    // const findUser = await UsersModel.find({ _id: userId });
     res.json({
       status: "OK",
       deletedUser: deletedUser
     })
+
   } catch (error) {
     res.status(400).json({
       status: "BAD",

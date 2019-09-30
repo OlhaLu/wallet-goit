@@ -5,6 +5,7 @@ const getTransactionsByUserId = async (req, res) => {
   try {
     const result = await Transactions.find({ userId });
     res.json({ transactions: result });
+    
   } catch (error) {
     res.json({ error });
   }

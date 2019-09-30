@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const transactionsControllers = require('../../controllers/transactions');
 
-router.get('/:userId', transactionsControllers.getTransactionsByUserId); // get order by id
-
+router.get('/:userId', transactionsControllers.getTransactionsByUserId);
 
 module.exports = router;

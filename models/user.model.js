@@ -10,8 +10,8 @@ const UserSchema = new Schema({
     password: String, 
     transactions: [
         {
-            type: Schema.Types.ObjectId, 
-            ref: "Transactions"
+        type: Schema.Types.ObjectId, 
+        ref: "Transactions"
         }
     ]
 }, { timestamps: true });

@@ -6,11 +6,12 @@ const updateUser = async (req, res) => {
 
   try {
     const updateUser = await UsersModel.findByIdAndUpdate(userId, { $push: updatedData });
-    // const findUser = await UsersModel.find({ _id: userId });
+
     res.json({
       status: "OK",
       user: updateUser
     })
+    
   } catch (error) {
     res.status(400).json({
       status: "BAD",

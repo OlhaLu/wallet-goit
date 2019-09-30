@@ -28,13 +28,10 @@ const costsOperations = (req, res) => {
       .required()
   });
 
-  // Return result.
   const result = Joi.validate(newData, schema);
-  // result.error === null -> valid
   if (result.error) {
     res.json({ error: error });
   }
-
   if (result.value) {
     const newOperations = new Transactions(result.value);
 
